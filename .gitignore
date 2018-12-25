@@ -49,3 +49,4 @@ shelljs_*
 *___jb_old___
 webpack/config/local.js
 .uglify-cache
+build
