@@ -1,0 +1,21 @@
+.card{
+  position: relative;
+  width: 300px;
+  min-height: 184px;
+  .cardHeader{
+    position: relative;
+    width: 100%;
+    color: #333;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    padding-left: 20px;
+    background: #fff;
+    font-weight: 600;
+  }
+  .cardBody{
+    width: 100%;
+    min-height: 148px;
+    background: rgba(255,255,255,0.5);
+  }
+}

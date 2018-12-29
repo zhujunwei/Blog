@@ -1,0 +1,45 @@
+.homePage{
+  position: relative;
+  width: 1200px;
+  margin:0 auto;
+  height: auto;
+  padding-top: 80px;
+}
+
+.leftBlock{
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+
+}
+
+.info{
+  position: relative;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  line-height: 14px;
+}
+.avatar{
+  width: 90px;
+  float: left;
+  clear: left;
+  margin-right: 10px;
+  height: 90px;
+  overflow: hidden;
+}
+
+.info_desc{
+  line-height: 24px;
+  font-size: 14px;
+  text-align: justify;
+}
+
+
+.rightBlock{
+  display: inline-block;
+  width: 880px;
+  vertical-align: top;
+  margin-left: 20px;
+  
+}

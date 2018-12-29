@@ -1,26 +1,33 @@
-import React, { Component } from "react";
+
+import React, {Component} from 'react';
+import {  BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import './App.css';
 import {Provider} from 'mobx-react';
-import {  BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import HeaderNav from './components/header-nav/header-nav';
+import Loadable from '@component/Loadable/loadable';
+
 import stores from './stores/index';
 
-import HomePage from "./pages/homePage/homePage";
+const HomePage = Loadable({
+  loader: () => import('./pages/home/home')
+});
 
-class App extends Component{
-  render(){
+class App extends Component {
+  render() {
     return (
       <Provider {...stores}>
         <Router >
           <div>
-           
+            <HeaderNav />
             <Switch>
               <Route exact path="/" component={HomePage} />
+              <Redirect to={"/"} component={HomePage} />
             </Switch>
-            
           </div>
         </Router>
       </Provider>
       
-    )
+    );
   }
 }
 

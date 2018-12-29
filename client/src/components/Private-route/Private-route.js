@@ -14,7 +14,11 @@ class PrivateRoute extends React.Component {
     this.setState({ isAuthenticated: isAuthenticated })
     if (!isAuthenticated) {
       const { history, location, userInfoStore } = this.props;
-      
+      if(/\/chapterlist||\/person/.test(location.pathname)){
+        userInfoStore.setLoginBtn(true);
+      }else{
+        userInfoStore.setLoginBtn(false);
+      }
     }
   }
 
@@ -22,7 +26,12 @@ class PrivateRoute extends React.Component {
     if (this.props.history.location !== this.props.location) {
       let isAuthenticated = localStorage.getItem("token") ? true : false;
       if (!isAuthenticated) {
-        
+        const { history, location, userInfoStore } = this.props;
+        if(/\/chapterlist||\/person/.test(location.pathname)){
+          userInfoStore.setLoginBtn(true);
+        }else{
+          userInfoStore.setLoginBtn(false);
+        }
       }
 
     }
