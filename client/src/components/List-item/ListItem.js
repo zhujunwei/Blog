@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styles from "./ListItem.scss";
-import Avatar from "@images/aisi.jpeg";
-
+import {Link} from "react-router-dom";
 export default class ListItem extends Component{
   constructor(props){
     super(props);
@@ -15,12 +14,13 @@ export default class ListItem extends Component{
       title,
       desc,
       img,
+      to,
       itemKey = ""
     } = this.props;
     return(
       <div className={styles.ListItem} key={itemKey}>
         <main className={styles.itemContain}>
-          <h3>{title}</h3>
+          <Link to={to}><h3>{title}</h3></Link>
           <p>{desc}</p>
         </main>
         <div className={styles.itemImg}>

@@ -1,0 +1,67 @@
+.detaiCardContain{
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding: 15px 30px;
+}
+
+.detailTitle{
+  position: relative;
+  text-align: left;
+  width: 100%;
+  font-size: 24px;
+  color: #333;
+  word-break: break-all;
+  font-weight: normal;
+}
+
+.detailDesc{
+  position: relative;
+  width: 100%;
+  line-height: 16px;
+  margin-top: 20px;
+  font-size: 14px;
+  span{
+    margin-right: 10px;
+    color: #555;
+  }
+}
+
+.tags{
+  width: 100%;
+  margin: 15px 0 10px; 
+}
+
+.tag{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 10px;
+  background: #f83;
+  color: #fff;
+  font-size: 14px;
+  line-height:24px;
+  height: 24px;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.otherInfo{
+  position: relative;
+  width: 100%;
+  color: #888888;
+  border: 1px solid #F3F3F3;
+  padding: 10px;
+  margin: 20px auto 15px auto;
+  line-height: 23px;
+  background: none repeat 0 0 #F6F6F6;
+}
+
+.detailInfos{
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+}

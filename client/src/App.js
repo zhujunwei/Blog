@@ -11,6 +11,9 @@ import stores from './stores/index';
 const HomePage = Loadable({
   loader: () => import('./pages/home/home')
 });
+const DetailPage = Loadable({
+  loader: () => import('./pages/detail/detail')
+});
 
 class App extends Component {
   render() {
@@ -21,6 +24,7 @@ class App extends Component {
             <HeaderNav />
             <Switch>
               <Route exact path="/" component={HomePage} />
+              <Route path="/detail" component={DetailPage} />
               <Redirect to={"/"} component={HomePage} />
             </Switch>
           </div>

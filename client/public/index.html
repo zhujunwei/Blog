@@ -5,35 +5,12 @@
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <title>直考通</title>
+    <title>朱俊伟的Blog</title>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-          extensions: ["tex2jax.js"],
-          jax: ["input/TeX","output/HTML-CSS"],
-          tex2jax: {
-            inlineMath: [
-              ['$', '$'],
-              ['\\(', '\\)']
-            ],
-            processEscapes: true
-          },
-          "HTML-CSS": {
-            showMathMenu: false,
-            availableFonts: [],
-            preferredFont: "TeX", 
-            imageFont: "TeX",
-            styles: {".MathJax_Preview": {visibility: "hidden"}}
-          },
-          showProcessingMessages: false,
-          messageStyle: "none"
-      });
-    </script>
     <div id="root"></div>
   </body>
 </html>
