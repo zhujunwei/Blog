@@ -12,6 +12,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -20,7 +21,7 @@ const publicPath = paths.servedPath;
 // For these, "homepage" can be set to "." to enable relative asset paths.
 const shouldUseRelativeAssetPaths = publicPath === './';
 // Source maps are resource heavy and can cause out of memory issue for large source files.
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const shouldUseSourceMap = false; //process.env.GENERATE_SOURCEMAP !== 'false';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -185,6 +186,7 @@ module.exports = {
                         importLoaders: 1,
                         modules: true,
                         minimize: true,
+                        localIdentName: `[name]_[local]_[hash:base64:5]`,
                         sourceMap: shouldUseSourceMap,
                       },
                     },
@@ -263,11 +265,16 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
-    new webpack.DefinePlugin(env.stringified),
+    // new webpack.DefinePlugin(env.stringified),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -335,6 +342,13 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",	
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

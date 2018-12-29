@@ -1,6 +1,7 @@
 .card{
   position: relative;
-  width: 300px;
+  max-width: 300px;
+
   min-height: 184px;
   .cardHeader{
     position: relative;
