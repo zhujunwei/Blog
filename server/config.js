@@ -1,8 +1,8 @@
 module.exports = {
   port: 8080,
-  mysqlHost: 'localhost',
-  mysqlPort: 3306,
-  mysqlName: 'root',
-  mysqlpwd: 'Zhu123456',
-  mysqlDB: 'blog'
+  mysql_host: 'localhost',
+  mysql_port: 3306,
+  mysql_user: 'xxxx',
+  mysql_password: 'xxxx',
+  mysql_dbname: 'blog'
 }
