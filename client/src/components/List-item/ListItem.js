@@ -24,7 +24,10 @@ export default class ListItem extends Component{
           <p>{desc}</p>
         </main>
         <div className={styles.itemImg}>
-          <img src={img} width="100%" height="100%" alt={"hohoho"}></img>
+          {
+            img && <img src={img} width="100%" height="100%" alt={"hohoho"}></img>
+          }
+          
         </div>
       </div>
     )

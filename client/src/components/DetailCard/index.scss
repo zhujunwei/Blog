@@ -63,5 +63,16 @@
   position: relative;
   width: 100%;
   height: auto;
+  min-height: 300px;
   margin-top: 30px;
+  :global{
+    pre{
+      padding: 16px;
+      overflow: auto;
+      font-size: 85%;
+      line-height: 1.45;
+      background-color: #f7f7f7;
+      border-radius: 3px;
+    }
+  }
 }

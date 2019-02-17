@@ -24,7 +24,7 @@ class App extends Component {
             <HeaderNav />
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/detail" component={DetailPage} />
+              <Route path="/detail/:id" component={DetailPage} />
               <Redirect to={"/"} component={HomePage} />
             </Switch>
           </div>

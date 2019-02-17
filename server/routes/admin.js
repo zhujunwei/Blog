@@ -26,7 +26,6 @@ module.exports=router;
 //进入所有的admin相关的页面之前，都要校验用户身份——如果没登录过，滚去登陆(/admin/login)
 //“所有的”，除了"/admin/login"
 router.use((req, res, next)=>{
-  console.log(req.cookies);
   if(!req.cookies['admin_token'] && req.path != '/login' && req.path != '/register'){
     res.send({
       code: -1,
@@ -58,8 +57,6 @@ router.use((req, res, next)=>{
 //提交登陆请求
 router.post('/login', (req, res)=>{
   let {username, password}=req.body;
-  console.log("username", username);
-  console.log("password", password);
   function setToken(id){
     let ID=utils.uuid();
 
@@ -103,7 +100,6 @@ router.post('/login', (req, res)=>{
     res.end();
   }
 });
-
 //注册请求
 router.post('/register', (req, res)=>{
   let {username, password}=req.body;
@@ -171,38 +167,60 @@ router.get('/getArticleList', (req, res) => {
     res.end();
   }
 })
-//增加文章
+//增加修改文章
 router.post('/addArticle', (req, res) => {
   let {
     title,
     desc,
-    article
+    article,
+    ID
   } = req.body;
   let adminID = req.admin_ID; //创建人的id
   let create_time = Date.now();
-  let sqlList = `INSERT INTO admin_article_list (title, description, creater, create_time) VALUES (?, ?, ?, ?)`;
-  let detailSql = `INSERT INTO admin_article_detail (article_detail, article_title, article_desc, create_at, update_at, ID) values (?, ?, ?, ?, ?, ?)`;
-  queryAsBody(req, sqlList, [title, desc, adminID, create_time + ""])
-    .then((data) => {
-      let id = data.insertId;
-      return queryAsBody(req, detailSql, [article, title, desc, create_time, create_time, id])
-    })
-    .then(res2 => {
-      res.send({
-        code: 0,
-        msg: "ok",
-        result: true
+  
+  if(ID) {
+    let sqlList = `UPDATE admin_article_list SET title = ?, description = ? WHERE ID = ?`;
+    let detailSql = `UPDATE admin_article_detail SET article_detail = ? , article_title = ? , article_desc = ?, update_at = ? WHERE ID = ?`;
+    queryAsBody(req, sqlList, [title, desc, ID])
+      .then((data) => {
+        return queryAsBody(req, detailSql, [article, title, desc, create_time, ID])
       })
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res2 => {
+        res.send({
+          code: 0,
+          msg: "ok",
+          result: true
+        })
+      })
+      .catch(err => {
+        showError("修改失败")
+      })
+  }else{
+    let sqlList = `INSERT INTO admin_article_list (title, description, creater, create_time) VALUES (?, ?, ?, ?)`;
+    let detailSql = `INSERT INTO admin_article_detail (article_detail, article_title, article_desc, create_at, update_at, ID) values (?, ?, ?, ?, ?, ?)`;
+    queryAsBody(req, sqlList, [title, desc, adminID, create_time + ""])
+      .then((data) => {
+        let id = data.insertId;
+        return queryAsBody(req, detailSql, [article, title, desc, create_time, create_time, id])
+      })
+      .then(res2 => {
+        res.send({
+          code: 0,
+          msg: "ok",
+          result: true
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        showError("添加失败")
+      })
+  }
+  
   function showError(msg){
     res.send({code: -1, msg: msg});
     res.end();
   }
 })
-
 //删除文章
 router.post('/deleteArticle', (req, res) => {
   let {
@@ -227,34 +245,23 @@ router.post('/deleteArticle', (req, res) => {
     res.end();
   }
 })
-
-//修改文章
-router.post('/updateArticle', (req, res) => {
-  let {
-    title,
-    desc,
-    article,
-    ID
-  } = req.body;
-  let create_time = Date.now();
-  let sqlList = `UPDATE admin_article_list SET title = ?, description = ? WHERE ID = ?`;
-  let detailSql = `UPDATE admin_article_detail SET article_detail = ? , article_title = ? , article_desc = ?, update_at = ?`;
-  queryAsBody(req, sqlList, [title, desc, ID])
-    .then((data) => {
-      return queryAsBody(req, detailSql, [article, title, desc, create_time])
-    })
-    .then(res2 => {
+//获取文章详情
+router.get("/getArticleDetail", (req, res) => {
+  let ID=req.query['ID'];
+  console.log("ID", ID)
+  let sqlList = `SELECT article_detail, article_title, article_desc FROM admin_article_detail WHERE ID = ?`;
+  queryAsBody(req, sqlList, [ID])
+    .then(result => {
+      console.log("result", result);
       res.send({
         code: 0,
         msg: "ok",
-        result: true
+        result: result
       })
+      res.end();
     })
     .catch(err => {
-      console.log(err)
+      res.send({code: -1, msg: "获取文章详情失败"});
+      res.end();
     })
-  function showError(msg){
-    res.send({code: -1, msg: msg});
-    res.end();
-  }
 })

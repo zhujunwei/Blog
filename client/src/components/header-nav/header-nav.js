@@ -39,8 +39,8 @@ export default class HeaderNav extends Component{
           <nav>
             <div className={styles["logo"]}><a href="/">麻辣小面瘫</a></div>
             <ul>
-              <li>
-                <NavLink to={`/index`}>足迹</NavLink></li>
+              {/* <li>
+                <NavLink to={`/index`}>足迹</NavLink></li> */}
               <li>
                 <NavLink to={`/index`}>首页</NavLink></li>
             </ul>

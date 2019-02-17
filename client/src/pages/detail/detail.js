@@ -5,9 +5,15 @@ import Layout from '@component/Layout/layout';
 import DetailCard from '@component/DetailCard/index';
 import Avatar from "@images/aisi.jpeg";
 import {Affix} from "antd";
+import {withRouter} from "react-router-dom";
 
+@withRouter
 export default class Detail extends Component {
+  state = {
+
+  }
   render(){
+    let id = this.props.match.params.id;
     return(
       <div>
         <Layout
@@ -19,19 +25,14 @@ export default class Detail extends Component {
                     <img src={Avatar} width="100%" alt={"头像"}></img>
                   </i>
                   <p className={styles.info_desc}>
-                    麻辣小面瘫,麻辣小面瘫,麻辣小面瘫,麻辣小面瘫麻辣小面瘫麻辣小面瘫麻辣小面瘫麻辣小面瘫，麻辣小面瘫，
-                    麻辣小面瘫,麻辣小面瘫,麻辣小面瘫,麻辣小面瘫麻辣小面瘫麻辣小面瘫麻辣小面瘫麻辣小面瘫，麻辣小面瘫，
+                    朱俊伟， 男， 93年， 双鱼座， 前端。
                   </p>
                 </div>
               </Card>
             </Affix>
           }
         >
-          <DetailCard
-            title={"test啊啊啊"}
-            name={'麻辣小面瘫'}
-            time={"1"}
-          ></DetailCard>
+          <DetailCard id={id}></DetailCard>
         </Layout>
       </div>
     )

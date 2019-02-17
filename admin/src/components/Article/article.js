@@ -110,7 +110,8 @@ export default class ArticleComponent extends Component{
                                 this.setState({
                                   mode: "edit",
                                   updateParam: {
-                                    ID: element.ID
+                                    ID: element.ID,
+                                    editItem: element
                                   }
                                 })
                               }}

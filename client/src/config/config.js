@@ -1,13 +1,11 @@
 import axios from 'axios';
-//测试环境
-//axios.defaults.baseURL = "http://zc.miyaketang.com:8082";
-//生产环境
-axios.defaults.baseURL = "https://zktapi.cqmapp.com";
-const appId = "2zuz25wpw2rlz4grtuwl4swm5kvfyzfz"
+//开发环境
+// axios.defaults.baseURL = "http://localhost:8080/admin";
+axios.defaults.baseURL = "/users";
 
 //请求头设置
 axios.interceptors.request.use(function (config) {    // 这里的config包含每次请求的内容  
-	config.data = { ...config.data, ...{ appId } }
+	config.data = { ...config.data}
 	const token = localStorage.getItem('token');
 	if (token) {
 		config.headers.token = token;
@@ -24,8 +22,8 @@ axios.interceptors.request.use(function (config) {
 
 //拦截请求回应, 在这里做统一的状态处理
 axios.interceptors.response.use(function (result) {
-	if (result.data.code === 200) {
-		return result.data.data;
+	if (result.data.code === 0) {
+		return result.data;
 	}
 	return Promise.reject(result.data)
 	
